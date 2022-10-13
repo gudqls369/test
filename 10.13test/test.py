@@ -1,13 +1,13 @@
 import torch
 import cv2
-import sys
+
 model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
-imgs = ['10.13test\photo.jpg'] # batch of images
+imgs = ['10.13test\photo.jpg']
 
 results = model(imgs)
 
 tmp_img = cv2.imread("10.13test\photo.jpg")
-print('세로:', tmp_img.shape[0], '가로:', tmp_img.shape[1])
+print('세로:', tmp_img.shape[0], 'px', '가로:', tmp_img.shape[1], 'px')
 
 cv2.rectangle(tmp_img, (int(results.xyxy[0][0][0].item()), int(results.xyxy[0][0][1].item())), (int(results.xyxy[0][0][2].item()), int(results.xyxy[0][0][3].item())), (255,255,255))
 cv2.rectangle(tmp_img, (int(results.xyxy[0][1][0].item()), int(results.xyxy[0][1][1].item())), (int(results.xyxy[0][1][2].item()), int(results.xyxy[0][1][3].item())), (255,255,255))
